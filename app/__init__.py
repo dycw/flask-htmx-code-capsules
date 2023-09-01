@@ -1,6 +1,7 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
 
 persistent_path = os.getenv(
     "PERSISTENT_STORAGE_DIR", os.path.dirname(os.path.realpath(__file__))
@@ -17,8 +18,10 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy()
 
-from app import views
-from app import models
+from app import models  # noqa: E402
+from app import views  # noqa: E402
+
+_ = {views, models}
 
 db.init_app(app)
 
