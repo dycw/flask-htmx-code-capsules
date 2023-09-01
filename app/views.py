@@ -1,10 +1,11 @@
+from flask import render_template, request
+
 from app import app, db
-from flask import render_template, request, jsonify
 from app.models import Author, Book
 
 
 @app.route("/", methods=["GET"])
-def home():
+def home() -> str:
     books = (
         db.session.query(Book, Author)
         .filter(Book.author_id == Author.author_id)
@@ -14,7 +15,7 @@ def home():
 
 
 @app.route("/submit", methods=["POST"])
-def submit():
+def submit() -> str:
     global_book_object = Book()
 
     title = request.form["title"]
@@ -63,7 +64,7 @@ def submit():
 
 
 @app.route("/delete/<int:id>", methods=["DELETE"])
-def delete_book(id: int):
+def delete_book(id: int) -> str:  # noqa: A002
     book = Book.query.get(id)
     db.session.delete(book)
     db.session.commit()
@@ -72,7 +73,7 @@ def delete_book(id: int):
 
 
 @app.route("/get-edit-form/<int:id>", methods=["GET"])
-def get_edit_form(id):
+def get_edit_form(id: int) -> str:  # noqa: A002
     book = Book.query.get(id)
     author = Author.query.get(book.author_id)
 
@@ -94,7 +95,7 @@ def get_edit_form(id):
 
 
 @app.route("/get-book-row/<int:id>", methods=["GET"])
-def get_book_row(id):
+def get_book_row(id: int) -> str:  # noqa: A002
     book = Book.query.get(id)
     author = Author.query.get(book.author_id)
 
@@ -120,9 +121,11 @@ def get_book_row(id):
 
 
 @app.route("/update/<int:id>", methods=["PUT"])
-def update_book(id):
-    db.session.query(Book).filter(Book.book_id == id).update(
-        {"title": request.form["title"]}
+def update_book(id: int) -> str:  # noqa: A002
+    _ = (
+        db.session.query(Book)
+        .filter(Book.book_id == id)
+        .update({"title": request.form["title"]})
     )
     db.session.commit()
 
