@@ -1,2 +1,3 @@
-# htmx-flask-modern-python-web-apps
-HTMX + Flask: Modern Python Web Apps, Hold the JavaScript (Michael Kennedy)
+# Building a Full Stack Application with Flask and HTMx (Code Capsules)
+
+- https://codecapsules.io/docs/tutorials/build-flask-htmx-app/
