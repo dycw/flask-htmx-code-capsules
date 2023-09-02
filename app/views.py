@@ -42,7 +42,7 @@ def submit() -> str:
         db.session.commit()
         global_book_object = book
 
-    response = f"""
+    return f"""
     <tr>
         <td>{title}</td>
         <td>{author_name}</td>
@@ -60,7 +60,6 @@ def submit() -> str:
         </td>
     </tr>
     """
-    return response
 
 
 @app.route("/delete/<int:id>", methods=["DELETE"])
@@ -77,7 +76,7 @@ def get_edit_form(id: int) -> str:  # noqa: A002
     book = Book.query.get(id)
     author = Author.query.get(book.author_id)
 
-    response = f"""
+    return f"""
     <tr hx-trigger='cancel' class='editing' hx-get="/get-book-row/{id}">
   <td><input name="title" value="{book.title}"/></td>
   <td>{author.name}</td>
@@ -91,7 +90,6 @@ def get_edit_form(id: int) -> str:  # noqa: A002
   </td>
     </tr>
     """
-    return response
 
 
 @app.route("/get-book-row/<int:id>", methods=["GET"])
@@ -99,7 +97,7 @@ def get_book_row(id: int) -> str:  # noqa: A002
     book = Book.query.get(id)
     author = Author.query.get(book.author_id)
 
-    response = f"""
+    return f"""
     <tr>
         <td>{book.title}</td>
         <td>{author.name}</td>
@@ -117,7 +115,6 @@ def get_book_row(id: int) -> str:  # noqa: A002
         </td>
     </tr>
     """
-    return response
 
 
 @app.route("/update/<int:id>", methods=["PUT"])
@@ -133,7 +130,7 @@ def update_book(id: int) -> str:  # noqa: A002
     book = Book.query.get(id)
     author = Author.query.get(book.author_id)
 
-    response = f"""
+    return f"""
     <tr>
         <td>{title}</td>
         <td>{author.name}</td>
@@ -151,4 +148,3 @@ def update_book(id: int) -> str:  # noqa: A002
         </td>
     </tr>
     """
-    return response
