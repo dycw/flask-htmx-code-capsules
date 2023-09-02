@@ -10,7 +10,7 @@ class Author(db.Model):
 
     @override
     def __repr__(self) -> str:
-        return "<Author: {}>".format(self.books)
+        return f"<Author: {self.books}>"
 
 
 class Book(db.Model):
