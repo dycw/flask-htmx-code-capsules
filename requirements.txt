@@ -24,6 +24,8 @@ flask==2.3.3
     #   flask-sqlalchemy
 flask-sqlalchemy==3.0.5
     # via -r requirements.in
+greenlet==3.0.1
+    # via sqlalchemy
 gunicorn==21.2.0
     # via -r requirements.in
 identify==2.5.27
@@ -58,7 +60,7 @@ typing-extensions==4.7.1
     # via sqlalchemy
 virtualenv==20.24.4
     # via pre-commit
-werkzeug==2.3.7
+werkzeug==3.0.1
     # via flask
 wheel==0.41.2
     # via pip-tools
